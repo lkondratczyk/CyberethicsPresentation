@@ -18,6 +18,31 @@
    * Drew
    */
    
-   #drew {
-
+   .tbl {
+   		display:block;
+   		width:66%;
+   		margin:auto;
+   		border: 1px solid black;
    }
+   
+   .tblr {
+   		display:inline-block;
+   		width:100%;
+   	}
+   	
+   	.tblc {
+   		text-align:center;
+   		display:inline-block;
+   		width:49%;
+   	}
+   	
+   	.tbl p {
+		margin:20px 0;
+   	 }
+   	 
+   	.lgnum {
+   		font-size:70px;
+   	}
+   	
+   	.smtext {
+   		font-style:italic;
