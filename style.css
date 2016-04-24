@@ -7,12 +7,17 @@
  /*
   * Global
   */
-  
+.section {
+   	border: 1px solid black;
+   	width:90%;
+   	height:auto;
+   	margin: 40px auto;
+   }  
   
   /*
    * Drew
    */
    
    #drew {
-   	border: 1px solid black;
+
    }
