@@ -56,6 +56,12 @@
    		width:49%;
    	}
    	
+   	.tblc3 {
+   		text-align:center;
+   		display:inline-block;
+   		width:32%;
+   	}
+   	
    	.tbl p {
 		margin:20px 0;
    	 }
@@ -77,12 +83,23 @@
    	}
   
   
-  	#drewS3 {
+  	#drewS2 {
+  		width:90%;
+  	}
+  	
+  	#readyVid {
+  		display:block;
+  		margin:40px auto;
+  		width:680px;
+  		height:382px;
+  	}
+  
+  	#drewS3, #drewS5 {
   		width:100%;
   		display:inline-block;
   	}
   	
-   	#futureImg {
+   	#futureImg, #sensorsImg {
    		display:block;
    		float:left;
    	   	width:61%;
@@ -90,7 +107,7 @@
    		padding: 0 2%;
    	}
    	
-   	#futureTxt {
+   	#futureTxt, #sensorsTxt {
    		display:block;
 		float:left;
    		width:30%;	
@@ -98,7 +115,7 @@
    		padding:0 2%;
    	}
    	
-   	#futureTxt ol li {
+   	#futureTxt ol li, #sensorsTxt ol li {
    		margin:20px auto;
    	}
    	
@@ -109,4 +126,15 @@
    	.emph {
    		font-style: italic;
    	}
-   
+ 
+  	#bikeVidDiv {
+  		display:inline-block;
+  		width:100%;
+  	}  	
+   	  	
+  	#bikeVid {
+  		display:block;
+  		margin:20px auto;
+  		width:680px;
+  		height:382px;
+  	}
