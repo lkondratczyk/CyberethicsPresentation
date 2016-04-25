@@ -7,6 +7,12 @@
  /*
   * Global
   */
+  
+  h1, h2, h3, h4 {
+  	text-align:center;
+  }
+  
+  
 .section {
    	border: 1px solid black;
    	width:90%;
@@ -18,9 +24,23 @@
    * Drew
    */
    
+   .drewSN {
+   		display:block;
+		margin:50px auto 100px auto;
+		width:80%;
+   	}
+   	
+   	#speeding {
+   		width:100%;
+   	}
+   	
+   	#drewTopics {
+   		width:50%;
+   		margin:40px auto;
+   	}
    .tbl {
    		display:block;
-   		width:66%;
+   		width:100%;
    		margin:auto;
    		border: 1px solid black;
    }
@@ -46,3 +66,47 @@
    	
    	.smtext {
    		font-style:italic;
+   	}
+   	
+   	/* List Styling */
+   	
+   	.srclst {
+   		padding:0;
+		text-align:center;
+   		list-style:none;
+   	}
+  
+  
+  	#drewS3 {
+  		width:100%;
+  		display:inline-block;
+  	}
+  	
+   	#futureImg {
+   		display:block;
+   		float:left;
+   	   	width:61%;
+   		margin:0;
+   		padding: 0 2%;
+   	}
+   	
+   	#futureTxt {
+   		display:block;
+		float:left;
+   		width:30%;	
+   		margin:0;
+   		padding:0 2%;
+   	}
+   	
+   	#futureTxt ol li {
+   		margin:20px auto;
+   	}
+   	
+   	.focus {
+   		font-weight:bold;
+   	}
+   	
+   	.emph {
+   		font-style: italic;
+   	}
+   
