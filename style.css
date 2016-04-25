@@ -55,6 +55,11 @@
    		display:inline-block;
    		width:49%;
    	}
+   	 .tblc1 {
+   		text-align:center;
+   		display:inline-block;
+   		width:100%;
+   	}
    	
    	.tblc3 {
    		text-align:center;
@@ -137,4 +142,10 @@
   		margin:20px auto;
   		width:680px;
   		height:382px;
+  	}
+  	
+  	#trolleyImg {
+		display:block;
+		margin: 50px auto;
+		width:70%;
   	}
