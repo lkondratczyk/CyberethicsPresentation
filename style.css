@@ -19,6 +19,129 @@
    	height:auto;
    	margin: 40px auto;
    }  
+
+/*
+* Allen
+*/
+
+#allen li {
+  margin: 0 0 15px 0;
+}
+
+
+.img-left {
+  display: block;
+  float: left;
+  margin: 0 0 5% 0;
+  padding: 0 2%;
+}
+
+.img-right {
+  display: block;
+  float: right;
+  margin: 0 0 5% 0;
+  padding: 0 2%;
+}
+
+.clear {
+  clear: both;
+}
+
+#carmargin {
+  margin-left: 500px;
+}
+
+.centered {
+  display: block;
+  margin: 0 auto;
+}
+
+.highlight {
+  background-color: blue;
+  color: white;
+  margin: 0 430px 10px;
+  padding: 5px 0 5px;
+}
+
+.cd-container {
+  width: 95%;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.cd-container::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.cd-timeline-content {
+  margin-left: 80px;
+}
+
+#cd-timeline {
+  position: relative;
+  padding: 1em 0;
+  margin-bottom: 2em;
+}
+
+#cd-timeline h2 {
+  text-align: left;
+}
+
+#cd-timeline::before {
+  /* this is the vertical line */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 18px;
+  height: 100%;
+  width: 4px;
+  background: #d7e4ed;
+}
+
+.cd-timeline-block {
+  position: relative;
+  margin: 2em 0;
+}
+.cd-timeline-block:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.cd-timeline-block:first-child {
+  margin-top: 0;
+}
+.cd-timeline-block:last-child {
+  margin-bottom: 0;
+}
+
+.cd-timeline-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+
+}
+
+.cd-timeline-img span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  margin-left: -25px;
+  margin-top: -19px;
+  color: #c03b44;
+  font-size: 150%;
+  font-weight: bold;
+}
+
+
+
+
   
   /*
    * Drew
