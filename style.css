@@ -147,14 +147,20 @@
    * Drew
    */
    
+   #drew {
+   		overflow:hidden;
+   	}
+   	
    .drewSN {
+   		float:left;
    		display:block;
-		margin:50px auto 100px auto;
-		width:80%;
+   		margin:0;
    	}
    	
    	#speeding {
-   		width:100%;
+   		display:block;
+   		margin:50px auto;
+   		width:80%;
    	}
    	
    	#drewTopics {
@@ -223,11 +229,6 @@
 		text-align:center;
    		list-style:none;
    	}
-  
-  
-  	#drewS2 {
-  		width:90%;
-  	}
   	
   	#readyVid, #compVid {
   		display:block;
@@ -261,6 +262,12 @@
    		font-style: italic;
    	}
  
+ 	#trolleyQs {
+ 	display:block !important;
+ 		width:100%;
+ 		height: 100%;
+ 		margin:auto;
+ 	}
   	#bikeVidDiv {
   		display:inline-block;
   		width:100%;
@@ -285,3 +292,4 @@
   		width:100%;
   		text-align:center;
   	}
+  	

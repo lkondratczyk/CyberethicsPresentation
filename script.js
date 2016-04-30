@@ -11,8 +11,10 @@ window.onload = function() {
 	var secs = document.getElementsByClassName("drewSN");
 	var ptr = 0;
 	
-	root.style.height = (height - 100) + "px";
-	root.style.width = (width * parseFloat(0.9)) + "px";
+	var h = (height - 100);
+	var w = (width * parseFloat(0.9));
+	root.style.height = h + "px";
+	root.style.width = w + "px";
 	
 	function next() {
 		ptr = (ptr + 1) % secs.length;
@@ -20,10 +22,10 @@ window.onload = function() {
 	}
 	
 	function show(p) {
-		console.log("p is " + p);
 		for (var i = 0; i < secs.length; i++) {
+			secs[i].style.width = w + "px";
+			secs[i].style.height = h + "px";
 			if (i == p) {
-				console.log("showing " + i);
 				secs[i].style.display = "block";
 			}
 			else {
@@ -32,6 +34,8 @@ window.onload = function() {
 		}
 	}
 	
+	document.getElementById("trolleyQs").setAttribute("height", h);
+	document.getElementById("trolleyQs").setAttribute("width", w);
 	document.getElementById("drewNxt").addEventListener("click", function() {
 		next();
 	});
