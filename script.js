@@ -61,6 +61,7 @@ window.onload = function() {
 	var svg = d3.select(map.getPanes().overlayPane).append("svg");
 	var g = svg.append("g").attr("class", "leaflet-zoom-hide");
 	
+	var NUM_YEARS = 15;
 	d3.json("resources/roads.json", function(data) {
 		var features = data.features;
 		mapCoordinatesToView(features);
@@ -68,6 +69,13 @@ window.onload = function() {
 		var transform = d3.geo.transform({ point: projectPoint });
 		var d3path = d3.geo.path().projection(transform);
 		
+		
+		var colorScale = d3.scale.linear()
+			.domain([0, NUM_YEARS])
+			.range(["blue", "red"])
+			.interpolate(d3.interpolateHcl);
+			
+			
 		var toLine = d3.svg.line()
 			.interpolate("linear")
 			.x(function(d) {
@@ -137,7 +145,7 @@ window.onload = function() {
 		reset();
 		
 		animate = function() {
-			for (var i = 0; i < 15; i++) {
+			for (var i = 0; i < NUM_YEARS; i++) {
 				drawYear(i);
 			}
 		};
@@ -147,34 +155,40 @@ window.onload = function() {
 			points[i].state = 0;
 		}
 		
+		var baseYear = 2012;
+		var auto = 0;
 		function drawYear(y) {
 			setTimeout(function() {
+				document.getElementById("year").innerHTML = (baseYear + y); 
 				for (var i = 0; i < points.length; i++) {
 					var p = points[i];
-					if (y < 4) {
-						if (Math.random() < 0.1 && p.state < 1) {
-							p.style.fill = "#ACD58F";
+					if (y < 3) {
+						if (Math.random() < 0.05 && p.state < 1) {
+							p.style.fill = colorScale(y);
 							p.style.opacity = 1;
+							if (p.state == 0) auto++;
 							p.state = 1;
 						}
 						else {
 							// do nothing
 						}
 					} 
-					else if (y < 7) {
-						if (Math.random() < 0.2 && p.state < 2) {
-							p.style.fill = "#D86A47";
-														p.style.opacity = 1;
+					else if (y < 6) {
+						if (Math.random() < 0.1 && p.state < 2) {
+							p.style.fill = colorScale(y);
+							p.style.opacity = 1;
+							if (p.state == 0) auto++;
 							p.state = 2;
 						}
 						else {
 							// do nothing
 						}
 					}
-					else if (y < 10) {
-						if (Math.random() < 0.33 && p.state < 3) {
-							p.style.fill = "#93C8D4";
-														p.style.opacity = 1;
+					else if (y < 9) {
+						if (Math.random() < 0.1 && p.state < 3) {
+							p.style.fill = colorScale(y);
+							p.style.opacity = 1;
+							if (p.state == 0) auto++;
 							p.state = 3;
 						}
 						else {
@@ -182,9 +196,10 @@ window.onload = function() {
 						}
 					}
 					else if (y < 14) {
-						if (Math.random() < 0.50 && p.state < 4) {
-							p.style.fill = "red";
-														p.style.opacity = 1;
+						if (Math.random() < 0.4 && p.state < 4) {
+							p.style.fill = colorScale(y);
+							p.style.opacity = 1;
+							if (p.state == 0) auto++;							
 							p.state = 4;
 						}
 						else {
@@ -192,12 +207,23 @@ window.onload = function() {
 						}
 					}
 					else {
-						p.style.fill = "red";
+						p.style.fill = colorScale(y);
 						p.style.opacity = 1;
+						if (p.state == 0) auto++;
 						p.state = 4;
-					}
+					}	
+				}
+				
+				var form = ((parseFloat(auto) / points.length).toFixed(2) + " ").split("\.");
+				var pct;
+				if (form[0] == 1) {
+					pct = form[0] + form[1];
+				}
+				else {
+					pct = form[1];
+				}
 					
-				}		
+				document.getElementById("pen").innerHTML = pct;
 			}, y * 1000);
 		} // end drawYear function
 		
