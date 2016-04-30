@@ -37,7 +37,12 @@ window.onload = function() {
 	document.getElementById("trolleyQs").setAttribute("height", h);
 	document.getElementById("trolleyQs").setAttribute("width", w);
 	document.getElementById("drewNxt").addEventListener("click", function() {
-	next();
+		next();
+	});
+	
+	var animate;
+	document.getElementById("drewVis").addEventListener("click", function() {
+		animate();
 	});
 	
 	
@@ -51,7 +56,7 @@ window.onload = function() {
 	
 	var map = L.map('map')
 	.addLayer(mapboxTiles)
-	.setView([34.00756196861457, -118.49982261657716], 15);
+	.setView([33.90139678750913, -118.28928283691406], 11);
 				
 	var svg = d3.select(map.getPanes().overlayPane).append("svg");
 	var g = svg.append("g").attr("class", "leaflet-zoom-hide");
@@ -129,6 +134,15 @@ window.onload = function() {
 			this.stream.point(point.x, point.y);
 		}
 		
+		reset();
+		
+		animate = function() {
+			var points = d3.selectAll(".point")[0];
+			console.log(points);
+			for (var i = 0; i < points.length; i++) {
+ 				points[i].style.fill = "yellow";
+			}
+		};
 	}); // end d3.json function
 		
 };
