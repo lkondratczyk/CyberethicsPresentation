@@ -11,8 +11,8 @@ window.onload = function() {
 	var secs = document.getElementsByClassName("drewSN");
 	var ptr = 0;
 	
-	root.style.height = (height - 80) + "px";
-	root.style.width = (width - 80) + "px";
+	root.style.height = (height - 100) + "px";
+	root.style.width = (width * parseFloat(0.9)) + "px";
 	
 	function next() {
 		ptr = (ptr + 1) % secs.length;
@@ -35,6 +35,10 @@ window.onload = function() {
 	document.getElementById("drewNxt").addEventListener("click", function() {
 		next();
 	});
+	
+	
+	// init
+	show(ptr);
 		
 };
 
