@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Cyberethics Presentation</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-
+    <script type="text/javascript" src="script.js"></script>
+</head>
 <body>
 
-	
 	<div class="section" id="alan">
 	<!-- SECTION 1 -->
     <h1>A Little History</h1>
@@ -18,16 +18,16 @@
   			</div> <!-- cd-timeline-img -->
 
   			<div class="cd-timeline-content">
-  				<h2>The Beginning</h2>
-          <img src="images/benz.jpg" height="200" width="350">
-          <img src="images/karl.jpg" height="200" width="200">
-          <img src="images/carhistory.jpg" height="200" width="350">
-          <ul>
+  			<h2>The Beginning</h2>
+         	<img src="images/benz.jpg" height="200" width="350">
+          	<img src="images/karl.jpg" height="200" width="200">
+          	<img src="images/carhistory.jpg" height="200" width="350">
+          	<ul>
             <li>In 1885, Karl Benz invented the first automobile</li>
           </ul>
-  		</div> <!-- cd-timeline-block -->
+  			
+  			</div> <!-- cd-timeline-block -->
 
-  		<div class="cd-timeline-block">
   			<div class="cd-timeline-img cd-movie">
           <span>1900s</span>
   			</div> <!-- cd-timeline-img -->
@@ -45,7 +45,7 @@
           </ul>
   		</div> <!-- cd-timeline-block -->
 
-  		<div class="cd-timeline-block">
+  			<div class="cd-timeline-block">
   			<div class="cd-timeline-img cd-picture">
   				<span>2000s</span>
   			</div> <!-- cd-timeline-img -->
@@ -62,7 +62,7 @@
   			</div> <!-- cd-timeline-content -->
   		</div> <!-- cd-timeline-block -->
 
-  		<div class="cd-timeline-block">
+  			<div class="cd-timeline-block">
   			<div class="cd-timeline-img cd-location">
   				<span>2010s</span>
   			</div> <!-- cd-timeline-img -->
@@ -79,52 +79,20 @@
           </ul>
   			</div> <!-- cd-timeline-content -->
   		</div> <!-- cd-timeline-block -->
-  	</section> <!-- cd-timeline -->
+		</div>
+	</section> <!-- cd-timeline -->
 	</div>
-
-
+		
+	
 	<div class="section" id="chi">
 	</div>
+	
+	
 	<div class="section" id="drew">
+	
+		<button id="drewNxt">&rarr;</button>
 		
-		<!-- Section 1 -->
-		<h1>Technical &amp; Ethical Impacts of Autonomous Vehicles</h1>
-		<div class="drewSN" id="drewS1">
-			<img id="speeding" src="images/speeding_cartoon.jpeg">
-		</div>
-		
-		<!-- Section 2 -->
-<<<<<<< HEAD
-		<h1>Current State of Autonomous Cars</h1>
-		<div class="drewSN" id="drewS2">
-			<iframe id="readyVid" src="https://www.youtube.com/embed/uCezICQNgJU" frameborder="0" allowfullscreen></iframe>
-		</div>
-		
-		<!-- Section 3 -->
-		<h1>The Future of Autonomous Cars</h1>
-		<div class="drewSN" id="drewS3">
-			<div id="futureTxt">
-				<h3>Four Phases of Autonimity</h3>
-				<ol>
-					<li><span class="focus">Phase 1</span><br />
-						Sensors and advanced electronics complement driver.<br /><span class="emph">current</span>
-					</li>
-					<li><span class="focus">Phase 2</span><br />
-						Primary driver with delegate computer assistance.<br /><span class="emph">+2 years</span>
-					</li>
-					<li><span class="focus">Phase 3</span><br />
-						Driver becomes delegate in extreme circumstance.<br /><span class="emph">+5 years</span>
-					</li>
-					<li><span class="focus">Phase 4</span><br />
-						Full automation, no driver needed or even present.<br /><span class="emph">+10 years</span>
-					</li>
-				</ol>
-			</div>
-			<img id="futureImg" src="images/timeline.jpg">
-		</div>
-
-		<!-- Section 4 -->
-		<h1>Human v. Machine Drivers</h1>
+		<!-- *Comparing Current & Future* -->
 		<div class="drewSN" id="drewS4">
 			<div class="tbl">
 				<!-- row 1 -->
@@ -163,9 +131,38 @@
 			</div> 
 		</div>
 		
-		<!-- Section 5 -->
-		<h1>Technical Challenges of AI</h1>
+		<!-- *Google Video* -->
+		<div class="drewSN" id="drewS2">
+			<h1>Current State of Autonomous Cars</h1>
+			<iframe id="readyVid" src="https://www.youtube.com/embed/uCezICQNgJU" frameborder="0" allowfullscreen></iframe>
+		</div>
+		
+		<!-- *Future Chart* -->
+		<div class="drewSN" id="drewS3">
+			<h1>The Future of Autonomous Cars</h1>
+			<div id="futureTxt">
+				<h3>Four Phases of Autonimity</h3>
+				<ol>
+					<li><span class="focus">Phase 1</span><br />
+						Sensors and advanced electronics complement driver.<br /><span class="emph">current</span>
+					</li>
+					<li><span class="focus">Phase 2</span><br />
+						Primary driver with delegate computer assistance.<br /><span class="emph">+2 years</span>
+					</li>
+					<li><span class="focus">Phase 3</span><br />
+						Driver becomes delegate in extreme circumstance.<br /><span class="emph">+5 years</span>
+					</li>
+					<li><span class="focus">Phase 4</span><br />
+						Full automation, no driver needed or even present.<br /><span class="emph">+10 years</span>
+					</li>
+				</ol>
+			</div>
+			<img id="futureImg" src="images/timeline.jpg">
+		</div>
+		
+		<!-- *The Hard Problem* -->
 		<div class="drewSN" id="drewS5">
+			<h1>Technical Challenges of AI</h1>
 			<h2>Self-Driving Car's Components</h2>
 			<div class="tbl">
 				<!-- row 1 -->
@@ -221,9 +218,9 @@
 			</ul>
 		</div>
 	
-		<!-- Section 6 -->
-		<h1>Ethical Challenges of AI</h1>
+		<!-- *The Trolley Problem*-->
 		<div class="drewSN" id="drewS6">
+			<h1>Ethical Challenges of AI</h1>
 			<h2>The Trolley Problem</h2>
 			<img id="trolleyImg" src="images/trolley.jpg">
 			<div class="question">
@@ -285,8 +282,15 @@
 				</div>
 			</div> 
 		</div>
+				
+		<!-- *Comic*-->
+		<div class="drewSN" id="drewS1">
+		<h1>Technical &amp; Ethical Impacts of Autonomous Vehicles</h1>
+			<img id="speeding" src="images/speeding_cartoon.jpeg">
+		</div>
+	</div>
 	
-	</div> <!-- end drew's section -->
+	
 	<div class="section" id="lyndon">
 		<!-- video of future intersections here -->
 			<!-- https://youtu.be/ufK2XRGUjuc  -->
@@ -348,7 +352,10 @@
 		<!-- survey student preferences here -->
 			<!--  -->
 	</div>
+	
+	
 	<div class="section" id="alaysia">
 	</div>
 </body>
+
 </html>
