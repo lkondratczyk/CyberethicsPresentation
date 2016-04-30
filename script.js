@@ -48,8 +48,8 @@ window.onload = function() {
 	
 	// init
 	show(ptr);
-	
-	var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token={token}', {
+	// https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token={token}
+	var mapboxTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
        			attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
        			token: 'pk.eyJ1IjoiZHJld3N0aWxlcyIsImEiOiJjaWw2YXR4eXgwMWl6dWhsdjhrZGxuMXBqIn0.4rYaU8tPJ9Mw2bniPfAKdQ'
 	});
@@ -81,7 +81,7 @@ window.onload = function() {
 			.data(features)
 			.enter()
 			.append("circle")
-			.attr("r", 5)
+			.attr("r", 7)
 			.attr("class", "point");
 			
 		var linePath = g.selectAll(".lineConnect")
@@ -137,12 +137,70 @@ window.onload = function() {
 		reset();
 		
 		animate = function() {
-			var points = d3.selectAll(".point")[0];
-			console.log(points);
-			for (var i = 0; i < points.length; i++) {
- 				points[i].style.fill = "yellow";
+			for (var i = 0; i < 15; i++) {
+				drawYear(i);
 			}
 		};
+		
+		var points = d3.selectAll(".point")[0];
+		for (var i = 0; i < points.length; i++) {
+			points[i].state = 0;
+		}
+		
+		function drawYear(y) {
+			setTimeout(function() {
+				for (var i = 0; i < points.length; i++) {
+					var p = points[i];
+					if (y < 4) {
+						if (Math.random() < 0.1 && p.state < 1) {
+							p.style.fill = "#ACD58F";
+							p.style.opacity = 1;
+							p.state = 1;
+						}
+						else {
+							// do nothing
+						}
+					} 
+					else if (y < 7) {
+						if (Math.random() < 0.2 && p.state < 2) {
+							p.style.fill = "#D86A47";
+														p.style.opacity = 1;
+							p.state = 2;
+						}
+						else {
+							// do nothing
+						}
+					}
+					else if (y < 10) {
+						if (Math.random() < 0.33 && p.state < 3) {
+							p.style.fill = "#93C8D4";
+														p.style.opacity = 1;
+							p.state = 3;
+						}
+						else {
+							// do nothing
+						}
+					}
+					else if (y < 14) {
+						if (Math.random() < 0.50 && p.state < 4) {
+							p.style.fill = "red";
+														p.style.opacity = 1;
+							p.state = 4;
+						}
+						else {
+							// do nothing
+						}
+					}
+					else {
+						p.style.fill = "red";
+						p.style.opacity = 1;
+						p.state = 4;
+					}
+					
+				}		
+			}, y * 1000);
+		} // end drawYear function
+		
 	}); // end d3.json function
 		
 };

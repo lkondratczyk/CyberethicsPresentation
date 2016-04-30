@@ -302,13 +302,14 @@
   	.lineConnect {
   		fill: none;
 		stroke-width: 1px;
-		stroke: blue;
-		opacity: 0;
+		stroke: white;
+		opacity: 1;
 	}
 	
 	.point {
-		fill: #ACD58F;
-		opacity: 1;
+		fill: blue;
+		opacity: 0;
+		transition: all 1000ms linear;
 	}
 		
 		
