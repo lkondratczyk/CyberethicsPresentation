@@ -8,97 +8,149 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.4/mapbox.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
 
-	<div class="section" id="alan">
-	<!-- SECTION 1 -->
-    <h1>A Little History</h1>
-    <section id="cd-timeline" class="cd-container">
-  		<div class="cd-timeline-block">
-  			<div class="cd-timeline-img cd-picture">
-  				<span>1800s</span>
-  			</div> <!-- cd-timeline-img -->
+  <div class="section" id="allen">
+    <ul class="w3-navbar w3-black">
+      <li><a href="#" onclick="openCity('timeline')">Timeline</a></li>
+      <li><a href="#" onclick="openCity('Paris')">Human Drivers</a></li>
+      <li><a href="#" onclick="openCity('Tokyo')">Upsides and Downsides</a></li>
+    </ul>
 
-  			<div class="cd-timeline-content">
-  			<h2>The Beginning</h2>
-         	<img src="images/benz.jpg" height="200" width="350">
-          	<img src="images/karl.jpg" height="200" width="200">
-          	<img src="images/carhistory.jpg" height="200" width="350">
-          	<ul>
-            <li>In 1885, Karl Benz invented the first automobile</li>
-          </ul>
-  			
-  			</div> <!-- cd-timeline-block -->
+    <div id="timeline" class="city">
+      <!-- SECTION 1 -->
+      <h1><i class="fa fa-history fa-lg" aria-hidden="true"></i>
+        &nbsp;A Little History</h1>
+      <section id="cd-timeline" class="cd-container">
+      	<div class="cd-timeline-block">
+      		<div class="cd-timeline-img cd-picture">
+      		    <span>1800s</span>
+      		</div> <!-- cd-timeline-img -->
 
-  			<div class="cd-timeline-img cd-movie">
-          <span>1900s</span>
-  			</div> <!-- cd-timeline-img -->
+      		<div class="cd-timeline-content">
+      		  <h2>The Beginning</h2>
+            <img src="images/benz.jpg" height="200" width="350">
+            <img src="images/karl.jpg" height="200" width="200">
+            <img src="images/carhistory.jpg" height="200" width="350">
+            <ul>
+              <li>In 1885, Karl Benz invented the first automobile</li>
+            </ul>
+          </div>
+      	</div> <!-- cd-timeline-block -->
 
-  			<div class="cd-timeline-content">
-  				<h2>The Early Years</h2>
-          <img src="images/generalmotors.jpg" height="150" width="300">
-          <img src="images/futura.jpg" height="150" width="280">
-          <img src="images/munich.jpg" height="180" width="585">
-          <ul>
-            <li>General Motors presents the concept of driverless cars at
-              the 1939 World's Fair</li>
-              <li>1984 &amp; 1987 Carnegie Mellon University and Bundeswehr University Munich
-              develop autonomous vans </li>
-          </ul>
-  		</div> <!-- cd-timeline-block -->
+        <div class="cd-timeline-block">
+      	   <div class="cd-timeline-img cd-movie">
+             <span>1900s</span>
+      	  </div> <!-- cd-timeline-img -->
 
-  			<div class="cd-timeline-block">
-  			<div class="cd-timeline-img cd-picture">
-  				<span>2000s</span>
-  			</div> <!-- cd-timeline-img -->
+          <div class="cd-timeline-content">
+      	     <h2>The Early Years</h2>
+             <img src="images/generalmotors.jpg" height="150" width="300">
+             <img src="images/futura.jpg" height="150" width="280">
+             <img src="images/munich.jpg" height="180" width="585">
+             <ul>
+               <li>General Motors presents the concept of driverless cars at
+                the 1939 World's Fair</li>
+                <li>1984 &amp; 1987 Carnegie Mellon University and Bundeswehr University Munich
+                develop autonomous vans </li>
+            </ul>
+          </div>
+        </div> <!-- cd-timeline-block -->
 
-  			<div class="cd-timeline-content">
-  				<h2>The Jumpstart</h2>
-          <img src="images/darpalogo.png" height="150" width="250">
-          <img src="images/darpa1.jpg" height="150" width="250">
-          <img src="images/darpa2.jpg" height="150" width="250">
-          <ul>
-            <li>In 2005, the US Derpartment of Defense issues the Grand DARPA Challenge
-              to build self-driviing cars for $1 million dollars </li>
-          </ul>
-  			</div> <!-- cd-timeline-content -->
-  		</div> <!-- cd-timeline-block -->
+      	<div class="cd-timeline-block">
+      	  <div class="cd-timeline-img cd-picture">
+      		    <span>2000s</span>
+      		</div> <!-- cd-timeline-img -->
 
-  			<div class="cd-timeline-block">
-  			<div class="cd-timeline-img cd-location">
-  				<span>2010s</span>
-  			</div> <!-- cd-timeline-img -->
+      		<div class="cd-timeline-content">
+      		    <h2>The Jumpstart</h2>
+              <img src="images/darpalogo.png" height="150" width="250">
+              <img src="images/darpa1.jpg" height="150" width="250">
+              <img src="images/darpa2.jpg" height="150" width="250">
+              <ul>
+                <li>In 2005, the US Derpartment of Defense issues the Grand DARPA Challenge
+                  to build self-driviing cars for $1 million dollars </li>
+              </ul>
+      		</div> <!-- cd-timeline-content -->
+      	</div> <!-- cd-timeline-block -->
 
-  			<div class="cd-timeline-content">
-  				<h2>The Present</h2>
-          <img src="images/google.jpg" height="180" width="290">
-          <img src="images/google1.jpg" height="180" width="290">
-          <img src="images/mercedes.jpg" height="180" width="290">
-          <ul>
-            <li>In 2012, Google began testing self-driving cars on public roads</li>
-            <li>Mercedes, Audi, BMW, and Tesla will offer models that are self-driving</li>
-            <li>In 2017, Google promises the introduce the first fully automated car</li>
-          </ul>
-  			</div> <!-- cd-timeline-content -->
-  		</div> <!-- cd-timeline-block -->
-		</div>
-	</section> <!-- cd-timeline -->
-	</div>
-		
-	
+      	<div class="cd-timeline-block">
+      	  <div class="cd-timeline-img cd-location">
+      		    <span>2010s</span>
+      		</div> <!-- cd-timeline-img -->
+
+      		<div class="cd-timeline-content">
+      		    <h2>The Present</h2>
+              <img src="images/google.jpg" height="180" width="290">
+              <img src="images/google1.jpg" height="180" width="290">
+              <img src="images/mercedes.jpg" height="180" width="290">
+              <ul>
+                <li>In 2012, Google began testing self-driving cars on public roads</li>
+                <li>Mercedes, Audi, BMW, and Tesla will offer models that are self-driving</li>
+                <li>In 2017, Google promises the introduce the first fully automated car</li>
+              </ul>
+      		</div> <!-- cd-timeline-content -->
+      	</div> <!-- cd-timeline-block -->
+    	</div>
+    </section> <!-- cd-timeline -->
+
+    <div id="Paris" class="city">
+      <!-- SECTION 2 -->
+      <h1><i class="fa fa-car fa-lg" aria-hidden="true"></i> &nbsp;Today's Human Drivers</h1>
+  		<ul>
+  			<li>Car accidents kill about 34,000 people every year in the USA, and 1.2 million around the world.</li>
+  			<li>There are 2.6 million people injuried in 1.8 million injury accidents in the USA in a typical year, and around 6 million total accidents. There are 50 million injuries worldwide. (WHO)</li>
+  			<li>The NHTSA estimates the total cost to society of accidents at around 230 billion dollars, around 2.5% of the GDP. Expressed per mile driven, it's about 8 cents/mile -- more than the cost of gasoline in a highly efficient car.</li>
+  			<li>Studies suggest that 40% of fatal accidents involve drunk driving and that 80% of all accidents are the result of driver inattention.</li>
+  			<li>Traffic congestion, caused by more than just accidents, wastes from 4 to 8 billion hours of people's time each year, and results in the burning of 6 billion gallons of extra fuel</li>
+  		</ul>
+    </div>
+
+    <div id="Tokyo" class="city">
+      <!-- SECTION 3 -->
+
+      <table>
+        <tr>
+          <td><h2>Upsides &nbsp; <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></h2></td>
+          <td><h2>Downsides &nbsp; <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></h2></td>
+        </tr>
+        <tr>
+          <td>- &nbsp; Fully Autonomous</td>
+          <td>- &nbsp; Bugs</td>
+        </tr>
+        <tr>
+          <td>- &nbsp; Save Lives</td>
+          <td>- &nbsp; Hackers</td>
+        </tr>
+        <tr>
+          <td>- &nbsp; Solves parking, congestion</td>
+          <td>-  &nbsp; Privacy</td>
+        </tr>
+        <tr>
+          <td>- &nbsp; Truly enables alternative fuels</td>
+          <td>- &nbsp; Unemployment</td>
+        </tr>
+      </table>
+    </div>
+
+	</div> <!-- section allen -->
+
+
 	<div class="section" id="chi">
 	</div>
-	
-	
+
+
 	<div class="section" id="drew">
-	
+
 		<div id="drewLgnd">
 			<button id="drewNxt">&rarr;</button>
 		</div>
-		
+
 		<div id="drewCntrl">
 			<div class="ctrlbox">
 				<button id="drewVis">&#9658;</button>
@@ -112,7 +164,7 @@
 				<p id="pen" class="val">0</p>
 			</div>
 		</div>
-		
+
 		<!-- *Current vs. Future* -->
 		<div class="drewSN" id="drewS4">
 		<h1>Current vs. Future</h1>
@@ -150,60 +202,60 @@
 							<p class="smtext">average new buying price</p>
 						</div>
 					</div>
-			</div> 
+			</div>
 		</div>
-		
+
 		<!-- *Google Video* -->
 		<div class="drewSN" id="drewS2">
 			<h1>Current State of Autonomous Cars</h1>
 			<iframe id="readyVid" src="https://www.youtube.com/embed/uCezICQNgJU" frameborder="0" allowfullscreen></iframe>
 		</div>
-		
+
 		<!-- *Classifying Automation* -->
 		<div class="drewSN" id="drewS3">
 			<h1>Classifying Automation</h1>
 			<img id="futureImg" src="images/timeline.jpg">
 		</div>
-		
+
 		<!-- *Visualizing Automation -->
 		<div class="drewSN" id="drewS3">
 			<div id="map"></div>
 		</div>
-		
+
 		<!-- *The Information Pipeline* -->
 		<div class="drewSN" id="drewS5">
 			<h1>The Information Pipeline</h1>
 			<img id="carStackImg" src="images/car_stack.png">
 		</div>
-	
+
 		<!-- *Component Overview* -->
 		<div class="drewSN" id="drewS2">
 			<h1>Component Overview</h1>
 			<iframe id="compVid" width="560" height="315" src="https://www.youtube.com/embed/rmY1irCK3iw" frameborder="0" allowfullscreen></iframe>
 		</div>
-		
+
 		<!-- *The Trolley Problem*-->
 		<div class="drewSN" id="drewS6">
 			<h1>Ethical Challenges in AI</h1>
 			<img id="trolleyImg" src="images/trolley.jpg">
 			<p id="trolleyQuote">Should you sacrifice one innocent bystander for the group?</p>
 		</div>
-			
+
 		<!-- *Trolly Questions* -->
 		<div class="drewSN" id="drewS2">
 			<h1>Trolley Questions</h1>
 			<iframe id="trolleyQs" src="https://docs.google.com/forms/d/1ydqr_3rB0J67G5EOhUDv2lYwAUZS3r8Ty7EYoI_BeKQ/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-		</div>	
+		</div>
 
 		<!-- *Comic*-->
 		<div class="drewSN" id="drewS1">
 		<h1>Technical &amp; Ethical Impacts of Autonomous Vehicles</h1>
 			<img id="speeding" src="images/speeding_cartoon.jpeg">
 		</div>
-		
+
 	</div>
-	
-	
+
+
 	<div class="section" id="lyndon">
 		<!-- video of future intersections here -->
 			<!-- https://youtu.be/ufK2XRGUjuc  -->
@@ -268,12 +320,12 @@
 				<p></P>
 			</ul>
 			<!-- http://usatoday30.usatoday.com/news/washington/judicial/story/2012-01-23/supreme-court-GPS/52754354/1  -->
-		<!-- visualize existing license plate scanning network here -->	
+		<!-- visualize existing license plate scanning network here -->
 			<h3>Example of license scanning technology-</h3>
 			<h1><p><img src='http://cironline.org/sites/default/files/styles/inline-medium/public/license_plate_scanner_0.jpg?itok=tP8CcChh'></img></p></h1>
-			<h3>We already give a lot of this information away to private companies via application permissions-</h3>			
+			<h3>We already give a lot of this information away to private companies via application permissions-</h3>
 			<h1><p><img src='http://www.wired.com/images_blogs/autopia/2010/09/BUMPinTraffic.jpg'></img></p></h1>
-			<h3>Let's find out what everyone thinks!</h3>	
+			<h3>Let's find out what everyone thinks!</h3>
 			<h1><iframe src="https://docs.google.com/forms/d/15fg84mGQu1cCR_xMDy2PC-5RwO6XzOPAdPEyktrr5M8/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></h1>
 			<!-- http://www.wired.com/images_blogs/autopia/2010/09/BUMPinTraffic.jpg -->
 			<!-- https://www.indybay.org/uploads/2013/07/28/aclu-license-plate-scanners-report-july-17-2013.pdf_600_.jpg -->
@@ -281,10 +333,22 @@
 		<!-- survey student preferences here -->
 			<!--  -->
 	</div>
-	
-	
+
+
 	<div class="section" id="alaysia">
 	</div>
+
+  <script>
+openCity("timeline")
+function openCity(cityName) {
+    var i;
+    var x = document.getElementsByClassName("city");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    document.getElementById(cityName).style.display = "block";
+}
+</script>
 </body>
 
 </html>
