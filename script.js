@@ -3,7 +3,7 @@
  */ 
 
 
-window.onload = function() { 
+window.onload = function() {
 	var height = window.innerHeight;
 	var width = window.innerWidth;
 	
@@ -11,7 +11,7 @@ window.onload = function() {
 	var secs = document.getElementsByClassName("drewSN");
 	var ptr = 0;
 	
-	var h = (height - 100);
+	var h = (height - 60);
 	var w = Math.ceil((width * parseFloat(0.9)));
 	root.style.height = h + "px";
 	root.style.width = w + "px";
@@ -24,9 +24,11 @@ window.onload = function() {
  		}
  		
  		if (ptr == 3) {
+ 			document.getElementById("drew").style.border = "1px solid white";
  			document.getElementById("drewCntrl").style.opacity = "1";
  		}
  		else {
+ 		 	document.getElementById("drew").style.border = "1px solid black";
  			document.getElementById("drewCntrl").style.opacity = "0";
  		}
  			
@@ -40,22 +42,40 @@ window.onload = function() {
  		}
  		
  		if (ptr == 3) {
+ 		 	document.getElementById("drew").style.border = "1px solid white";
  			document.getElementById("drewCntrl").style.opacity = "1";
  		}
  		else {
+ 		 	document.getElementById("drew").style.border = "1px solid black";
  			document.getElementById("drewCntrl").style.opacity = "0";
  		}
  			
  	}
  		
 	document.getElementById("swipeRight").addEventListener("click", function() {
-		ptr++;
-		swipeRight();
+		if (ptr < secs.length - 1) { 
+			ptr++;
+			swipeRight();
+		}
+		else {
+			this.style.backgroundColor = "red";
+			setTimeout(function() {
+				document.getElementById("swipeRight").style.backgroundColor = "black";
+			}, 250);
+		}
 	});
 	
 	document.getElementById("swipeLeft").addEventListener("click", function() {
-		ptr--;
-		swipeLeft();
+		if (ptr > 0) {
+			ptr--;
+			swipeLeft();
+		}
+		else {
+			this.style.backgroundColor = "red";
+			setTimeout(function() {
+				document.getElementById("swipeLeft").style.backgroundColor = "black";
+			}, 250);
+		}
 	});
 	
 	function init()	{
@@ -75,10 +95,14 @@ window.onload = function() {
        			attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
        			token: 'pk.eyJ1IjoiZHJld3N0aWxlcyIsImEiOiJjaWw2YXR4eXgwMWl6dWhsdjhrZGxuMXBqIn0.4rYaU8tPJ9Mw2bniPfAKdQ'
 	});
-	var map = L.map('map')
+	var map = L.map('map', {zoomControl:false})
 		.addLayer(mapboxTiles)
-		.setView([33.90139678750913, -118.28928283691406], 11);
-				
+		.setView([33.91439678750913, -118.245], 11);
+		
+	map.touchZoom.disable();
+	map.doubleClickZoom.disable();
+	map.scrollWheelZoom.disable();		
+	
 	var svg = d3.select(map.getPanes().overlayPane).append("svg");
 	var g = svg.append("g").attr("class", "leaflet-zoom-hide");
 	
