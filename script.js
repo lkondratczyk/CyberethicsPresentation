@@ -7,12 +7,20 @@ window.onload = function() {
 	var height = window.innerHeight;
 	var width = window.innerWidth;
 	
+	if (height < width) {
+		width = height;
+	}
+	else {
+		height = width;
+	}
+	
 	var root = document.getElementById("drew");
 	var secs = document.getElementsByClassName("drewSN");
 	var ptr = 0;
 	
-	var h = (height - 60);
-	var w = Math.ceil((width * parseFloat(0.9)));
+	var h = Math.ceil((height * parseFloat(0.9)));
+	var w = Math.ceil((width * parseFloat(0.95)));
+	
 	root.style.height = h + "px";
 	root.style.width = w + "px";
 	
