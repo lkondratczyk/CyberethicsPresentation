@@ -11,12 +11,17 @@
     font-family: 'Roboto', sans-serif;
   }
 
+  body {
+    background-image: url("images/gplaypattern.png");
+  }
+
   h1, h2, h3, h4 {
   	text-align:center;
   }
 
 
 .section {
+    background-color: white;
    	border: 1px solid black;
    	width:90%;
    	height:auto;
@@ -120,6 +125,14 @@
 
    #cd-timeline h2 {
      text-align: left;
+   }
+
+    #cd-timeline a {
+     width: 100%;
+     margin-left: 43%;
+   }
+   #cd-timeline a:visited {
+     color: black;
    }
 
    #cd-timeline::before {
