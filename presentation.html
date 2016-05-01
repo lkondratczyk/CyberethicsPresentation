@@ -100,16 +100,21 @@
 		</div>
 		
 		<div id="drewCntrl">
-			<div class="ctrlbox">
-				<button id="drewVis">&#9658;</button>
-			</div>
-			<div class="ctrlbox">
-				<p class="lbl">Year</p>
+			<div class="ctrlbox" id="controls">
+				<p id="yearLbl">Year</p>
 				<p id="year" class="val">2012</p>
+				<button id="prevYear">&larr;</button>
+				<button id="nextYear">&rarr;</button>
 			</div>
 			<div class="ctrlbox">
-				<p class="lbl">% Auto</p>
-				<p id="pen" class="val">0</p>
+				<p class="lbl">% Autonomous</p>
+				<p id="percentAuto" class="val">0</p>
+				<input type="checkbox" id="auto" class="cbox">
+			</div>
+			<div class="ctrlbox">
+				<p class="lbl">% Accidents</p>
+				<p id="percentAcc" class="val">0</p>
+				<input type="checkbox" id="acc" class="cbox">
 			</div>
 		</div>
 		

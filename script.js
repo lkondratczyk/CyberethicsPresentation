@@ -40,28 +40,33 @@ window.onload = function() {
 		next();
 	});
 	
-	var animate;
-	document.getElementById("drewVis").addEventListener("click", function() {
-		animate();
-	});
-	
 	
 	// init
 	show(ptr);
-	// https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token={token}
+	
 	var mapboxTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
        			attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
        			token: 'pk.eyJ1IjoiZHJld3N0aWxlcyIsImEiOiJjaWw2YXR4eXgwMWl6dWhsdjhrZGxuMXBqIn0.4rYaU8tPJ9Mw2bniPfAKdQ'
 	});
-	
 	var map = L.map('map')
-	.addLayer(mapboxTiles)
-	.setView([33.90139678750913, -118.28928283691406], 11);
+		.addLayer(mapboxTiles)
+		.setView([33.90139678750913, -118.28928283691406], 11);
 				
 	var svg = d3.select(map.getPanes().overlayPane).append("svg");
 	var g = svg.append("g").attr("class", "leaflet-zoom-hide");
 	
-	var NUM_YEARS = 15;
+	
+	var ratios = [
+		[0.1,0.1,0.1,0.1,0.1,0.1,0.4,0.4,0.4,0.4,0.4,0.4,0.7,0.9,1.0],
+		[0.2,0.2,0.2,0.2,0.2,0.2,0.1,0.1,0.1,0.1,0.1,0.1,0.05,0.01,0.0]
+	];
+	var maxYear = 2027;
+	var minYear = 2012;
+	var currentYear = minYear;
+	var numAuto = 0;
+	var numAcc = 0;
+	var autoIdx = 0;
+	var accIdx = 1;
 	d3.json("resources/roads.json", function(data) {
 		var features = data.features;
 		mapCoordinatesToView(features);
@@ -70,10 +75,10 @@ window.onload = function() {
 		var d3path = d3.geo.path().projection(transform);
 		
 		
-		var colorScale = d3.scale.linear()
-			.domain([0, NUM_YEARS])
-			.range(["blue", "red"])
-			.interpolate(d3.interpolateHcl);
+// 		var colorScale = d3.scale.linear()
+// 			.domain([0, NUM_YEARS])
+// 			.range(["blue", "red"])
+// 			.interpolate(d3.interpolateHcl);
 			
 			
 		var toLine = d3.svg.line()
@@ -120,8 +125,7 @@ window.onload = function() {
 				g.attr("transform", "translate(" + (-topLeft[0] + 50) + ","
 					+ (-topLeft[1] + 50) + ")");
 		} // end reset function
-				
-				
+								
 		function applyLatLngToLayer(d) {
 			var y = d.geometry.coordinates[1]
 			var x = d.geometry.coordinates[0];
@@ -142,90 +146,113 @@ window.onload = function() {
 			this.stream.point(point.x, point.y);
 		}
 		
-		reset();
-		
-		animate = function() {
-			for (var i = 0; i < NUM_YEARS; i++) {
-				drawYear(i);
-			}
-		};
-		
 		var points = d3.selectAll(".point")[0];
 		for (var i = 0; i < points.length; i++) {
 			points[i].state = 0;
 		}
 		
-		var baseYear = 2012;
-		var auto = 0;
 		function drawYear(y) {
-			setTimeout(function() {
-				document.getElementById("year").innerHTML = (baseYear + y); 
-				for (var i = 0; i < points.length; i++) {
-					var p = points[i];
-					if (y < 3) {
-						if (Math.random() < 0.05 && p.state < 1) {
-							p.style.fill = colorScale(y);
-							p.style.opacity = 1;
-							if (p.state == 0) auto++;
-							p.state = 1;
-						}
-						else {
-							// do nothing
-						}
-					} 
-					else if (y < 6) {
-						if (Math.random() < 0.1 && p.state < 2) {
-							p.style.fill = colorScale(y);
-							p.style.opacity = 1;
-							if (p.state == 0) auto++;
-							p.state = 2;
-						}
-						else {
-							// do nothing
-						}
-					}
-					else if (y < 9) {
-						if (Math.random() < 0.1 && p.state < 3) {
-							p.style.fill = colorScale(y);
-							p.style.opacity = 1;
-							if (p.state == 0) auto++;
-							p.state = 3;
-						}
-						else {
-							// do nothing
-						}
-					}
-					else if (y < 14) {
-						if (Math.random() < 0.4 && p.state < 4) {
-							p.style.fill = colorScale(y);
-							p.style.opacity = 1;
-							if (p.state == 0) auto++;							
-							p.state = 4;
-						}
-						else {
-							// do nothing
-						}
+			if (document.getElementById("auto").checked) {
+				drawAuto();
+			}
+			if (document.getElementById("acc").checked) {
+				setTimeout(function() { 
+					drawAcc();
+				}, 1000);
+			}
+				
+			// update legend	
+			document.getElementById("percentAuto").innerHTML = getRatio("auto").split("\.")[1];
+			document.getElementById("percentAcc").innerHTML = getRatio("acc").split("\.")[1];
+			document.getElementById("year").innerHTML = (currentYear); 
+		} // end drawYear function
+		
+		function getRatio(about) {
+			if (about == "auto") {
+				return (parseFloat(numAuto) / points.length).toFixed(2);
+			}
+			else if (about == "acc") {
+				return (parseFloat(numAcc)).toFixed(2)
+			}
+			else {
+				console.error("about = " + about);
+			}
+		};
+		
+		function setAuto(yes, e) {
+			if (yes) {
+				e.autonomous = true;
+				e.style.fill = "blue";
+				e.style.opacity = 1;							
+			}
+			else {
+				e.autonomous = false;
+				e.style.fill = "red";
+				e.style.opacity = 1;							
+			}
+		}
+		
+		function drawAuto() {
+			var protect = 0;
+			while (true) {
+				if (protect++ > 1000) break;
+				var i = Math.floor(Math.random() * points.length);
+				var p = points[i];
+				if (getRatio("auto") < ratios[autoIdx][currentYear - minYear]) {
+					// increase from current state
+					if (!p.autonomous) {
+						setAuto(true, p);
+						numAuto++;
 					}
 					else {
-						p.style.fill = colorScale(y);
-						p.style.opacity = 1;
-						if (p.state == 0) auto++;
-						p.state = 4;
-					}	
+						continue;
+					}
 				}
-				
-				var form = ((parseFloat(auto) / points.length).toFixed(2) + " ").split("\.");
-				var pct;
-				if (form[0] == 1) {
-					pct = form[0] + form[1];
+				else if (getRatio("acc") > ratios[autoIdx][currentYear - minYear]) {
+					// decrease from current state
+					if (p.autonomous) {
+						setAuto(false, p);
+						numAuto--;
+					}
+					else {
+						continue;
+					}
 				}
 				else {
-					pct = form[1];
+					break;
 				}
-					
-				document.getElementById("pen").innerHTML = pct;
-			}, y * 1000);
-		} // end drawYear function
+			}
+		}
+		
+		function drawAcc() {
+			var numAcc = (Math.floor(parseFloat(ratios[accIdx][currentYear - minYear]) * 100));
+			var l = linePath.node().getTotalLength();
+			g.selectAll(".accident").remove();
+			for (var i = 1; i <= numAcc; i++) {
+				var t = i / numAcc;
+				var p = linePath.node().getPointAtLength(t * l);
+				
+				g.append("circle")
+					.attr("r", 15)
+					.attr("class", "accident")
+					.style("opacity", "0.7")
+					.attr("transform", "translate(" + p.x + "," + p.y + ")");
+			}
+		}
+		
+		// initialize
+		reset();
+		for (var i = 0; i < points.length; i++) {
+			setAuto(false, points[i]);
+		};
+		
+		document.getElementById("nextYear").addEventListener("click", function() {
+			drawYear(currentYear++);
+		});
+		
+		document.getElementById("prevYear").addEventListener("click", function() {
+			drawYear(currentYear--);
+		});
 		
 	}); // end d3.json function
 		
