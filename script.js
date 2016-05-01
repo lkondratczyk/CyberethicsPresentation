@@ -9,41 +9,49 @@ window.onload = function() {
 	
 	var root = document.getElementById("drew");
 	var secs = document.getElementsByClassName("drewSN");
-	var ptr = 3;
+	var ptr = 0;
 	
 	var h = (height - 100);
-	var w = (width * parseFloat(0.9));
+	var w = Math.ceil((width * parseFloat(0.9)));
 	root.style.height = h + "px";
 	root.style.width = w + "px";
 	
-	function next() {
-		ptr = (ptr + 1) % secs.length;
-		show(ptr);
-	}
-	
-	function show(p) {
-		for (var i = 0; i < secs.length; i++) {
-			secs[i].style.width = w + "px";
-			secs[i].style.height = h + "px";
-			if (i == p) {
-				secs[i].style.display = "block";
-			}
-			else {
-				secs[i].style.display = "none";
-			}
-		}
-	}
+	function swipeRight() {
+ 		for (var i = 0; i < secs.length; i++) {
+ 			var s = secs[i];
+ 			var left = parseInt(s.style.left) - w;
+ 			s.style.left = left + "px";
+ 		}
+ 		
+ 		if (ptr == 3) {
+ 			document.getElementById("drewCntrl").style.display = "block";
+ 		}
+ 		else {
+ 			document.getElementById("drewCntrl").style.display = "none";
+ 		}
+ 			
+ 	} 			
 	
 	document.getElementById("trolleyQs").setAttribute("height", h);
 	document.getElementById("trolleyQs").setAttribute("width", w);
 	document.getElementById("drewNxt").addEventListener("click", function() {
-		next();
+		ptr++;
+		swipeRight();
 	});
 	
+	function init()	{
+		for (var i = 0; i < secs.length; i++) {
+			secs[i].style.width = w + "px";
+			secs[i].style.height = h + "px";
+			secs[i].style.left = (i * w) + "px";
+		}
+	}
 	
-	// init
-	show(ptr);
+	init();
 	
+	
+	// D3 code
+		
 	var mapboxTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
        			attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
        			token: 'pk.eyJ1IjoiZHJld3N0aWxlcyIsImEiOiJjaWw2YXR4eXgwMWl6dWhsdjhrZGxuMXBqIn0.4rYaU8tPJ9Mw2bniPfAKdQ'
@@ -55,12 +63,11 @@ window.onload = function() {
 	var svg = d3.select(map.getPanes().overlayPane).append("svg");
 	var g = svg.append("g").attr("class", "leaflet-zoom-hide");
 	
-	
 	var ratios = [
-		[0.1,0.1,0.1,0.1,0.1,0.1,0.4,0.4,0.4,0.4,0.4,0.4,0.7,0.9,1.0],
-		[0.2,0.2,0.2,0.2,0.2,0.2,0.1,0.1,0.1,0.1,0.1,0.1,0.05,0.01,0.0]
+		[0.02,0.04,0.07,0.11,0.16,0.21,0.27,0.34,0.42,0.41,0.61,0.72,0.84,0.96,1.00],
+		[0.20,0.18,0.16,0.14,0.12,0.10,0.08,0.06,0.04,0.03,0.02,0.01,0.01,0.01,0.00]
 	];
-	var maxYear = 2027;
+	var maxYear = 2026;
 	var minYear = 2012;
 	var currentYear = minYear;
 	var numAuto = 0;
@@ -73,13 +80,6 @@ window.onload = function() {
 		
 		var transform = d3.geo.transform({ point: projectPoint });
 		var d3path = d3.geo.path().projection(transform);
-		
-		
-// 		var colorScale = d3.scale.linear()
-// 			.domain([0, NUM_YEARS])
-// 			.range(["blue", "red"])
-// 			.interpolate(d3.interpolateHcl);
-			
 			
 		var toLine = d3.svg.line()
 			.interpolate("linear")
@@ -156,14 +156,28 @@ window.onload = function() {
 				drawAuto();
 			}
 			if (document.getElementById("acc").checked) {
-				setTimeout(function() { 
-					drawAcc();
-				}, 1000);
+				drawAcc();
 			}
 				
 			// update legend	
-			document.getElementById("percentAuto").innerHTML = getRatio("auto").split("\.")[1];
-			document.getElementById("percentAcc").innerHTML = getRatio("acc").split("\.")[1];
+			document.getElementById("percentAcc").innerHTML = getRatio("acc").split("\.")[0] + "%";
+			var autoRatio = "";
+			var autoRatioFormat = getRatio("auto");
+			var autoRatioWhole = autoRatioFormat.split("\.")[0];
+			var autoRatioDec = autoRatioFormat.split("\.")[1];
+			if (autoRatioWhole == 1) {
+				autoRatio = "100%"
+			}
+			else {
+				if (autoRatioDec.charAt(0) == "0") {
+					autoRatio = autoRatioDec.charAt(1) + "%";
+				}
+				else {
+					autoRatio = autoRatioDec + "%";
+				}	
+			}
+			
+			document.getElementById("percentAuto").innerHTML = autoRatio;
 			document.getElementById("year").innerHTML = (currentYear); 
 		} // end drawYear function
 		
@@ -179,80 +193,108 @@ window.onload = function() {
 			}
 		};
 		
-		function setAuto(yes, e) {
-			if (yes) {
-				e.autonomous = true;
-				e.style.fill = "blue";
-				e.style.opacity = 1;							
-			}
-			else {
-				e.autonomous = false;
-				e.style.fill = "red";
-				e.style.opacity = 1;							
+		function setAuto() {
+			for (var i = 0; i < points.length; i++) {
+				var p = points[i];
+				if (p.autonomous) {
+					p.style.fill = "blue";
+					p.style.opacity = 1;							
+				}
+				else {
+					p.style.fill = "red";
+					p.style.opacity = 1;							
+				}
 			}
 		}
 		
 		function drawAuto() {
-			var protect = 0;
-			while (true) {
-				if (protect++ > 1000) break;
-				var i = Math.floor(Math.random() * points.length);
-				var p = points[i];
-				if (getRatio("auto") < ratios[autoIdx][currentYear - minYear]) {
-					// increase from current state
-					if (!p.autonomous) {
-						setAuto(true, p);
-						numAuto++;
+			if (currentYear == maxYear) {
+				for (var i = 0; i < points.length; i++) {
+					points[i].autonomous = true;
+				}
+				numAuto = points.length;
+			}
+			else if (currentYear == minYear) {
+				for (var i = 0; i < points.length; i++) {
+					points[i].autonomous = false;
+				}
+				numAuto = 0;
+			}
+			else {
+				var protect = 0;
+				while (true) {
+					if (protect++ > 1000) break;
+					var i = Math.floor(Math.random() * points.length);
+					var p = points[i];
+					if (getRatio("auto") < ratios[autoIdx][currentYear - minYear]) {
+						// increase from current state
+						if (!p.autonomous) {
+							p.autonomous = true;
+							numAuto++;
+						}
+						else {
+							continue;
+						}
+					}
+					else if (getRatio("auto") > ratios[autoIdx][currentYear - minYear]) {
+						// decrease from current state
+						if (p.autonomous) {
+							p.autonomous = false;
+							numAuto--;
+						}
+						else {
+							continue;
+						}
 					}
 					else {
-						continue;
+						break;
 					}
-				}
-				else if (getRatio("acc") > ratios[autoIdx][currentYear - minYear]) {
-					// decrease from current state
-					if (p.autonomous) {
-						setAuto(false, p);
-						numAuto--;
-					}
-					else {
-						continue;
-					}
-				}
-				else {
-					break;
 				}
 			}
+			
+			setAuto();
 		}
 		
 		function drawAcc() {
-			var numAcc = (Math.floor(parseFloat(ratios[accIdx][currentYear - minYear]) * 100));
-			var l = linePath.node().getTotalLength();
-			g.selectAll(".accident").remove();
-			for (var i = 1; i <= numAcc; i++) {
-				var t = i / numAcc;
-				var p = linePath.node().getPointAtLength(t * l);
+			d3.selectAll(".accident").transition().duration(500).attr("r", 0);
+			numAcc = parseFloat(ratios[accIdx][currentYear - minYear]) * 100;
+			setTimeout(function() {
+				var l = linePath.node().getTotalLength();
+				g.selectAll(".accident").remove();
+				for (var i = 1; i <= numAcc; i++) {
+					var t = 0;
+					if (i == numAcc) {
+						t = Math.random();
+					}
+					else {
+						t = i / numAcc;
+					}
+					var p = linePath.node().getPointAtLength(t * l);
 				
-				g.append("circle")
-					.attr("r", 15)
-					.attr("class", "accident")
-					.style("opacity", "0.7")
-					.attr("transform", "translate(" + p.x + "," + p.y + ")");
-			}
+					g.append("circle")
+						.attr("r", 0)
+						.attr("class", "accident")
+						.style("opacity", "0.6")
+						.attr("transform", "translate(" + p.x + "," + p.y + ")")
+						.transition()
+						.duration(500)
+						.attr("r", 15);
+				}
+			}, 500);
 		}
 		
 		// initialize
 		reset();
-		for (var i = 0; i < points.length; i++) {
-			setAuto(false, points[i]);
-		};
 		
 		document.getElementById("nextYear").addEventListener("click", function() {
-			drawYear(currentYear++);
+			drawYear(++currentYear);
 		});
 		
 		document.getElementById("prevYear").addEventListener("click", function() {
-			drawYear(currentYear--);
+			drawYear(--currentYear);
 		});
+		
+		drawYear(currentYear);
 		
 	}); // end d3.json function
 		
