@@ -24,19 +24,38 @@ window.onload = function() {
  		}
  		
  		if (ptr == 3) {
- 			document.getElementById("drewCntrl").style.display = "block";
+ 			document.getElementById("drewCntrl").style.opacity = "1";
  		}
  		else {
- 			document.getElementById("drewCntrl").style.display = "none";
+ 			document.getElementById("drewCntrl").style.opacity = "0";
  		}
  			
  	} 			
 	
-	document.getElementById("trolleyQs").setAttribute("height", h);
-	document.getElementById("trolleyQs").setAttribute("width", w);
-	document.getElementById("drewNxt").addEventListener("click", function() {
+	function swipeLeft() {
+ 		for (var i = 0; i < secs.length; i++) {
+ 			var s = secs[i];
+ 			var left = parseInt(s.style.left) + w;
+ 			s.style.left = left + "px";
+ 		}
+ 		
+ 		if (ptr == 3) {
+ 			document.getElementById("drewCntrl").style.opacity = "1";
+ 		}
+ 		else {
+ 			document.getElementById("drewCntrl").style.opacity = "0";
+ 		}
+ 			
+ 	}
+ 		
+	document.getElementById("swipeRight").addEventListener("click", function() {
 		ptr++;
 		swipeRight();
+	});
+	
+	document.getElementById("swipeLeft").addEventListener("click", function() {
+		ptr--;
+		swipeLeft();
 	});
 	
 	function init()	{

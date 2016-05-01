@@ -181,8 +181,8 @@
    	
    	#carStackImg {
    		display:block;
-   	   	width:90%;
-   		margin:100px auto;
+   	   	width:70%;
+   		margin:20px auto;
    	}
    	
    .tbl {
@@ -324,10 +324,11 @@
 		z-index:1000;
 		width:300px;
 		height:80px;
-		opacity:0.7;
+		opacity:0;
+		display:block;
 		background-color:black;
 		border:1px solid white;
-		display:none;
+		transition:opacity 500ms linear;
 	}
 	
 	.ctrlbox {
@@ -397,4 +398,50 @@
 	
 	.accident {
 		fill:yellow;
+	}
+	
+	#swipeLeft {
+		width:10%;
+		height:100%;
+		position:absolute;
+		top:0;
+		left:0;
+		z-index:9999;
+		opacity:0;
+		transition: opacity 100ms linear;
+	}
+	
+	#swipeRight {
+		width:10%;
+		height:100%;
+		position:absolute;
+		top:0;
+		right:-1px;	
+		z-index:9999;
+		opacity:0;
+		transition: all 100ms linear;
+	}
+	
+	
+	
+	#swipeLeftText, #swipeRightText {
+	  	position: absolute;
+    	top: 50%;
+    	left: 50%;
+    	height: 30%;
+    	width: 50%;
+    	margin: -15% 0 0 -25%;
+    	font-size:40px;
+	}
+	
+	#swipeLeft:hover {
+		background-color:black;
+		color:white;
+		opacity:0.6;
+	}
+	
+	#swipeRight:hover {
+		background-color:black;
+		color:white;
+		opacity:0.6;
 	}
