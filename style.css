@@ -30,6 +30,12 @@
    	position:relative;
    }
 
+   #title h1{
+     font-size: 300%;
+     margin-top: 11%;
+     font-family: 'Sigmar One', cursive;
+   }
+
    /*
    * Allen
    */
@@ -209,7 +215,7 @@
    		font-family: Avenir, Helvetica, sans-serif;
    		overflow:hidden;
    	}
-   	
+
    	#drew h1 {
    		font-size:36px;
    	}
@@ -302,7 +308,7 @@
   		width:680px;
   		height:382px;
   	}
-   	
+
 
    	#futureTxt, #sensorsTxt {
    		display:block;
@@ -390,12 +396,12 @@
 		display:block;
 		float:left;
 	}
-	
+
 	#controls {
 		border-right:1px solid white;
 	}
-	
-	
+
+
 	#nextYear, #prevYear {
 		margin:0;
 		padding:0;
@@ -407,11 +413,11 @@
 		color:black;
 		float:left;
 	}
-	
+
 	#nextYear {
 		border-left:1px solid black;
 	}
-	
+
 	#prevYear {
 		border-right:1px solid black;
 	}
@@ -449,11 +455,11 @@
 		text-align:center;
 		font-family:sans-serif;
 	}
-	
+
 	.accident {
 		fill:yellow;
 	}
-	
+
 	#swipeLeft {
 		width:10%;
 		height:100%;
@@ -464,18 +470,18 @@
 		opacity:0;
 		transition: all 250ms linear;
 	}
-	
+
 	#swipeRight {
 		width:10%;
 		height:100%;
 		position:absolute;
 		top:0;
-		right:-1px;	
+		right:-1px;
 		z-index:9999;
 		opacity:0;
 		transition: all 250ms linear;
 	}
-	
+
 	#swipeLeftText, #swipeRightText {
 	  	position: absolute;
     	top: 50%;
@@ -485,19 +491,19 @@
     	margin: -15% 0 0 -25%;
     	font-size:40px;
 	}
-	
+
 	#swipeLeft:hover {
 		background-color:black;
 		color:white;
 		opacity:0.75;
 	}
-	
+
 	#swipeRight:hover {
 		background-color:black;
 		color:white;
 		opacity:0.75;
 	}
-	
+
 	.source {
 		display:block;
 		width:100%;
