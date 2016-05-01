@@ -107,8 +107,8 @@ window.onload = function() {
 	var g = svg.append("g").attr("class", "leaflet-zoom-hide");
 	
 	var ratios = [
-		[0.02,0.04,0.07,0.11,0.16,0.21,0.27,0.34,0.42,0.41,0.61,0.72,0.84,0.96,1.00],
-		[0.20,0.18,0.16,0.14,0.12,0.10,0.08,0.06,0.04,0.03,0.02,0.01,0.01,0.01,0.00]
+		[0.02,0.04,0.07,0.11,0.16,0.21,0.27,0.34,0.42,0.51,0.61,0.72,0.84,0.96,1.00],
+		[0.07,0.07,0.06,0.06,0.05,0.05,0.05,0.04,0.04,0.03,0.02,0.01,0.01,0.00,0.00]
 	];
 	var maxYear = 2026;
 	var minYear = 2012;
@@ -195,12 +195,25 @@ window.onload = function() {
 		}
 		
 		function drawYear(y) {
-			if (document.getElementById("auto").checked) {
-				drawAuto();
+			// check min bound
+			if (y == minYear) {
+				document.getElementById("prevYear").disabled = true;
 			}
-			if (document.getElementById("acc").checked) {
-				drawAcc();
+			else {
+				document.getElementById("prevYear").disabled = false;
 			}
+			
+			// check max bound
+			if (y == maxYear) {
+				document.getElementById("nextYear").disabled = true;
+			}
+			else {
+				document.getElementById("nextYear").disabled = false;
+			}
+			
+			drawAuto();
+
+			drawAcc();
 				
 			// update legend	
 			document.getElementById("percentAcc").innerHTML = getRatio("acc").split("\.")[0] + "%";
@@ -241,11 +254,11 @@ window.onload = function() {
 				var p = points[i];
 				if (p.autonomous) {
 					p.style.fill = "blue";
-					p.style.opacity = 1;							
+					p.style.opacity = 0.8;							
 				}
 				else {
 					p.style.fill = "red";
-					p.style.opacity = 1;							
+					p.style.opacity = 0.8;							
 				}
 			}
 		}

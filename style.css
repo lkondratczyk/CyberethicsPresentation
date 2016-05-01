@@ -160,7 +160,7 @@
    	}
    	
    	#drew h1 {
-   		font-size:30px;
+   		font-size:36px;
    	}
    .drewSN {
    		position:absolute;
@@ -184,8 +184,8 @@
    	
    	#futureImg {
    		display:block;
-   	   	width:60%;
-   		margin:auto;
+   	   	width:55%;
+   		margin:30px auto;
    		border:1px solid black;
    	}
    	
@@ -198,7 +198,7 @@
    .tbl {
    		display:block;
    		width:80%;
-   		margin:auto;
+   		margin:20px auto;
    }
    
    .tblr {
@@ -217,7 +217,7 @@
    	 }
    	 
    	.lgnum {
-   		font-size:70px;
+   		font-size:60px;
    	}
    	
    	.smtext {
@@ -232,9 +232,9 @@
    		list-style:none;
    	}
   	
-  	#readyVid, #compVid {
+  	#readyVid {
   		display:block;
-  		margin:40px auto;
+  		margin:60px auto 40px auto;
   		width:680px;
   		height:382px;
   	}
@@ -265,17 +265,6 @@
  		height: 100%;
  		margin:auto;
  	}
-  	#bikeVidDiv {
-  		display:inline-block;
-  		width:100%;
-  	}  	
-   	  	
-  	#bikeVid {
-  		display:block;
-  		margin:20px auto;
-  		width:680px;
-  		height:382px;
-  	}
   	
   	#trolleyImg {
 		display:block;
@@ -319,7 +308,7 @@
 	#drewCntrl {
 		position:absolute;
 		top: 20px;
-		right:20px;
+		right:40px;
 		z-index:1000;
 		width:300px;
 		height:80px;
@@ -384,10 +373,16 @@
 		text-align:center;
 		font-family:sans-serif;
 	}
-	
-	.cbox {
+
+	.sval {
+		color:white;
+		margin:10% 0 0 0;
+		font-size:26px;
 		display:block;
-		margin:auto;
+		width:100%;
+		height:60%;
+		text-align:center;
+		font-family:sans-serif;
 	}
 	
 	.accident {
@@ -436,4 +431,10 @@
 		background-color:black;
 		color:white;
 		opacity:0.75;
+	}
+	
+	.source {
+		display:block;
+		width:100%;
+		text-align: center;
 	}
