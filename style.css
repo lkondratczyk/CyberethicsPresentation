@@ -14,7 +14,7 @@
 
   body {
   	background: url(images/bgF.jpg) no-repeat center center fixed; 
-  	-webkit-background-size: cover;
+  	-webkit-background-size: 100%;
   }
 
   h1, h2, h3, h4 {
