@@ -9,19 +9,28 @@ window.onload = function() {
 	
 	var h = "";
 	var w = "";
+	var scrollPadFactor = -1;
 	if (height < width) {
 		h = Math.ceil((height * parseFloat(0.9)));
 		w = Math.ceil((width * parseFloat(0.75)));
+		scrollPadFactor = height*0.05;
 	}
 	else {
 		h = Math.ceil((height * parseFloat(0.75)));
 		w = Math.ceil((width * parseFloat(0.9)));
+		scrollPadFactor = height*0.125;
 	}
 
 	var root = document.getElementById("drew");	
 	root.style.height = h + "px";
 	root.style.width = w + "px";
 
+	var title = $("#title");
+	var marginTop = height/2 - title.height()/2 - 84;
+	setTimeout(function() {
+		title.css("margin-top", marginTop);
+	}, 2000);
+	
 	var secs = document.getElementsByClassName("drewSN");
 	var ptr = 0;
 	
@@ -87,6 +96,20 @@ window.onload = function() {
 		}
 	});
 	
+	$(".scrollTo").click(function() {
+		scrollTo($(this).val());
+	});
+	
+
+	function scrollTo(name) {
+
+		var top = $("#" + name).offset().top - scrollPadFactor;
+		$("html, body").animate({
+			scrollTop: top
+		}, 1000);
+	}
+		
+		
 	function init()	{
 		for (var i = 0; i < secs.length; i++) {
 			secs[i].style.width = w + "px";
