@@ -34,20 +34,20 @@
 		font-family: 'Roboto', sans-serif;
 		transition:all 750ms linear;
 	}
-	
+
 	.scrollToContainer {
 		position:relative;
 		width:90%;
 		display:block;
 		margin:auto;
 	}
-	
+
 	#allenScrollContainer, #chiScrollContainer {
 		width:75%;
 		margin:auto;
 
 	}
-	
+
 	.scrollTo {
 		position:absolute;
 		top:0;
@@ -56,23 +56,23 @@
 		height:64px;
 		border:none;
 	}
-	
+
 	#allenPart {
 		background: url(images/i1.png);
 	}
-	
+
 	#drewPart {
 		background: url(images/i2.png);
 	}
-	
+
 	#chiPart {
 		background: url(images/i3.png);
 	}
-	
+
 	#lyndonPart {
 		background: url(images/i4.png);
 	}
-	
+
 	#alaysiaPart {
 		background: url(images/i5.png);
 	}
@@ -113,7 +113,7 @@
    .w3-navbar li {
        float: left;
        margin: 15px;
-       width: 29%;
+       width: 45%;
        text-align: center;
    }
 
@@ -249,12 +249,6 @@
      font-weight: bold;
    }
 
-   #Paris ul {
-     margin: 5%;
-   }
-   #Paris li {
-     margin: 5%;
-   }
    #Tokyo table {
      width: 100%;
      margin: 5%;
@@ -286,13 +280,13 @@
 		width: 100%;
 		height:75%;
 	}
-	
+
 	.dFooter {
 		display:table;
 		width:100%;
 		height:10%;
 	}
-	
+
 	.source {
 		display:table-cell;
 		text-align:center;
@@ -328,19 +322,19 @@
    		width:50%;
    		margin:40px auto;
    	}
-   	
+
    	#carStackContent {
    		display:block;
    		background:url(images/car_stack.png) no-repeat center center;
    		background-size: 94% auto;
-   	}	
+   	}
 
 	#intersectContent {
    		display:block;
    		background:url(images/speeding_cartoon.jpeg) no-repeat center center;
    		background-size: 90% auto;
    	}
-   	
+
    .tbl {
    		display:block;
    		width:75%;
@@ -394,7 +388,7 @@
 	#vidContent {
 		display:table;
 	}
-	
+
 	#googleVidWrapper {
 		display:table-cell;
 		vertical-align: middle;
@@ -402,7 +396,7 @@
 		width:100%;
 		height:100%;
 	}
-	
+
   	#googleVid {
   		width:600px;
   		height:350px;
