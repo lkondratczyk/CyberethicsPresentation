@@ -7,22 +7,23 @@ window.onload = function() {
 	var height = window.innerHeight;
 	var width = window.innerWidth;
 	
+	var h = "";
+	var w = "";
 	if (height < width) {
-		width = height;
+		h = Math.ceil((height * parseFloat(0.9)));
+		w = Math.ceil((width * parseFloat(0.75)));
 	}
 	else {
-		height = width;
+		h = Math.ceil((height * parseFloat(0.75)));
+		w = Math.ceil((width * parseFloat(0.9)));
 	}
-	
-	var root = document.getElementById("drew");
-	var secs = document.getElementsByClassName("drewSN");
-	var ptr = 0;
-	
-	var h = Math.ceil((height * parseFloat(0.9)));
-	var w = Math.ceil((width * parseFloat(0.95)));
-	
+
+	var root = document.getElementById("drew");	
 	root.style.height = h + "px";
 	root.style.width = w + "px";
+
+	var secs = document.getElementsByClassName("drewSN");
+	var ptr = 0;
 	
 	function swipeRight() {
  		for (var i = 0; i < secs.length; i++) {
@@ -31,7 +32,7 @@ window.onload = function() {
  			s.style.left = left + "px";
  		}
  		
- 		if (ptr == 3) {
+ 		if (ptr == 2) {
  			document.getElementById("drew").style.border = "1px solid white";
  			document.getElementById("drewCntrl").style.opacity = "1";
  		}
@@ -49,7 +50,7 @@ window.onload = function() {
  			s.style.left = left + "px";
  		}
  		
- 		if (ptr == 3) {
+ 		if (ptr == 2) {
  		 	document.getElementById("drew").style.border = "1px solid white";
  			document.getElementById("drewCntrl").style.opacity = "1";
  		}
