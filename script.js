@@ -29,7 +29,7 @@ window.onload = function() {
 	var marginTop = height/2 - title.height()/2 - 84;
 	setTimeout(function() {
 		title.css("margin-top", marginTop);
-	}, 2000);
+	}, 500);
 	
 	var secs = document.getElementsByClassName("drewSN");
 	var ptr = 0;
@@ -41,12 +41,10 @@ window.onload = function() {
  			s.style.left = left + "px";
  		}
  		
- 		if (ptr == 2) {
- 			document.getElementById("drew").style.border = "1px solid white";
- 			document.getElementById("drewCntrl").style.opacity = "1";
+ 		if (ptr == 4) {
+ 			document.getElementById("drewCntrl").style.opacity = "0.9";
  		}
  		else {
- 		 	document.getElementById("drew").style.border = "1px solid black";
  			document.getElementById("drewCntrl").style.opacity = "0";
  		}
  			
@@ -59,12 +57,10 @@ window.onload = function() {
  			s.style.left = left + "px";
  		}
  		
- 		if (ptr == 2) {
- 		 	document.getElementById("drew").style.border = "1px solid white";
- 			document.getElementById("drewCntrl").style.opacity = "1";
+ 		if (ptr == 4) {
+ 			document.getElementById("drewCntrl").style.opacity = "0.9";
  		}
  		else {
- 		 	document.getElementById("drew").style.border = "1px solid black";
  			document.getElementById("drewCntrl").style.opacity = "0";
  		}
  			
@@ -78,7 +74,7 @@ window.onload = function() {
 		else {
 			this.style.backgroundColor = "red";
 			setTimeout(function() {
-				document.getElementById("swipeRight").style.backgroundColor = "black";
+				document.getElementById("swipeRight").style.backgroundColor = "white";
 			}, 250);
 		}
 	});
@@ -91,7 +87,7 @@ window.onload = function() {
 		else {
 			this.style.backgroundColor = "red";
 			setTimeout(function() {
-				document.getElementById("swipeLeft").style.backgroundColor = "black";
+				document.getElementById("swipeLeft").style.backgroundColor = "white";
 			}, 250);
 		}
 	});
@@ -123,7 +119,9 @@ window.onload = function() {
 	
 	// D3 code
 		
-	var mapboxTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+	// http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png
+	//
+	var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token={token}', {
        			attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>',
        			token: 'pk.eyJ1IjoiZHJld3N0aWxlcyIsImEiOiJjaWw2YXR4eXgwMWl6dWhsdjhrZGxuMXBqIn0.4rYaU8tPJ9Mw2bniPfAKdQ'
 	});
@@ -149,6 +147,9 @@ window.onload = function() {
 	var numAcc = 0;
 	var autoIdx = 0;
 	var accIdx = 1;
+	var accidentResizeAnimationLength = 500;
+	var numberOfAutonomousMarkers = 400;
+	var points = d3.selectAll(".point")[0];
 	d3.json("resources/roads.json", function(data) {
 		var features = data.features;
 		mapCoordinatesToView(features);
@@ -165,12 +166,6 @@ window.onload = function() {
 				return applyLatLngToLayer(d).y
 			});
 		
-		var ptFeatures = g.selectAll("circle")
-			.data(features)
-			.enter()
-			.append("circle")
-			.attr("r", 7)
-			.attr("class", "point");
 			
 		var linePath = g.selectAll(".lineConnect")
 				.data([features])
@@ -178,25 +173,41 @@ window.onload = function() {
 				.append("path")
 				.attr("class", "lineConnect");
 				
-		map.on("viewreset", reset);	
+				
 		function reset() {
 				var bounds = d3path.bounds(data),
 					topLeft = bounds[0],
 					bottomRight = bounds[1];
-					
-				ptFeatures.attr("transform",
-					function(d) {
-						return "translate(" + 
-							applyLatLngToLayer(d).x + "," +
-							applyLatLngToLayer(d).y + ")";
-					});
+				
+			linePath.attr("d", toLine);
+			for (var index = 0; index < numberOfAutonomousMarkers; index++) {
+		
+				var l = linePath.node().getTotalLength();
+				var t = index / numberOfAutonomousMarkers;
+				var p = linePath.node().getPointAtLength(t * l);
+				
+				
+				g.append("circle")
+							.attr("r", 0)
+							.attr("fill", "red")
+							.attr("class", "point")
+							.style("opacity", "0.8")
+							.attr("transform", "translate(" + p.x + "," + p.y + ")")
+							.transition()
+							.duration(accidentResizeAnimationLength)
+							.attr("r", 4);	
+			}	
+			
+			points = d3.selectAll(".point")[0];
+			for (var i = 0; i < points.length; i++) {
+				points[i].state = 0;
+			}
 					
 				svg.attr("width", bottomRight[0] - topLeft[0] + 120)
 					.attr("height", bottomRight[1] - topLeft[1] + 120)
 					.style("left", topLeft[0] - 50 + "px")
 					.style("top", topLeft[1] - 50 + "px");
-				
-				linePath.attr("d", toLine);
+			
 				g.attr("transform", "translate(" + (-topLeft[0] + 50) + ","
 					+ (-topLeft[1] + 50) + ")");
 		} // end reset function
@@ -221,10 +232,8 @@ window.onload = function() {
 			this.stream.point(point.x, point.y);
 		}
 		
-		var points = d3.selectAll(".point")[0];
-		for (var i = 0; i < points.length; i++) {
-			points[i].state = 0;
-		}
+		
+
 		
 		function drawYear(y) {
 			// check min bound
@@ -242,10 +251,12 @@ window.onload = function() {
 			else {
 				document.getElementById("nextYear").disabled = false;
 			}
-			
-			drawAuto();
 
 			drawAcc();
+			
+			setTimeout(function() {
+				drawAuto();
+			}, accidentResizeAnimationLength);
 				
 			// update legend	
 			document.getElementById("percentAcc").innerHTML = getRatio("acc").split("\.")[0] + "%";
@@ -257,12 +268,12 @@ window.onload = function() {
 				autoRatio = "100%"
 			}
 			else {
-				if (autoRatioDec.charAt(0) == "0") {
-					autoRatio = autoRatioDec.charAt(1) + "%";
-				}
-				else {
-					autoRatio = autoRatioDec + "%";
-				}	
+ 				 if (autoRatioDec.charAt(0) == "0") {
+  				 	autoRatio = autoRatioDec.charAt(1) + "%";
+  				}
+ 				else {
+ 					autoRatio = autoRatioDec + "%";
+ 				}	
 			}
 			
 			document.getElementById("percentAuto").innerHTML = autoRatio;
@@ -286,16 +297,15 @@ window.onload = function() {
 				var p = points[i];
 				if (p.autonomous) {
 					p.style.fill = "blue";
-					p.style.opacity = 0.8;							
 				}
 				else {
-					p.style.fill = "red";
-					p.style.opacity = 0.8;							
+					p.style.fill = "red";						
 				}
 			}
 		}
 		
 		function drawAuto() {
+		
 			if (currentYear == maxYear) {
 				for (var i = 0; i < points.length; i++) {
 					points[i].autonomous = true;
@@ -342,9 +352,9 @@ window.onload = function() {
 			
 			setAuto();
 		}
-		
+	
 		function drawAcc() {
-			d3.selectAll(".accident").transition().duration(500).attr("r", 0);
+			d3.selectAll(".accident").transition().duration(accidentResizeAnimationLength).attr("r", 0);
 			numAcc = parseFloat(ratios[accIdx][currentYear - minYear]) * 100;
 			setTimeout(function() {
 				var l = linePath.node().getTotalLength();
@@ -362,17 +372,15 @@ window.onload = function() {
 					g.append("circle")
 						.attr("r", 0)
 						.attr("class", "accident")
-						.style("opacity", "0.6")
+						.style("opacity", "0.8")
 						.attr("transform", "translate(" + p.x + "," + p.y + ")")
 						.transition()
-						.duration(500)
-						.attr("r", 15);
+						.duration(accidentResizeAnimationLength)
+						.attr("r", 20);
 				}
-			}, 500);
+			}, accidentResizeAnimationLength*2); // allow 2 prior animation frames
 		}
-		
-		// initialize
-		reset();
+
 		
 		document.getElementById("nextYear").addEventListener("click", function() {
 			drawYear(++currentYear);
@@ -382,6 +390,7 @@ window.onload = function() {
 			drawYear(--currentYear);
 		});
 		
+		reset();
 		drawYear(currentYear);
 		
 	}); // end d3.json function
