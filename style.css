@@ -13,7 +13,8 @@
   }
 
   body {
-    background-image: url("images/gplaypattern.png");
+  	background: url(images/bgF.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
   }
 
   h1, h2, h3, h4 {
@@ -21,20 +22,75 @@
   }
 
 
+	#title {
+		background-color:  #0D6C54;
+		border:3px solid white;
+		width:70%;
+		margin:1000px auto 20px auto;
+		border-radius:25px;
+		color:white;
+		padding:5%;
+		font-family: 'Roboto', sans-serif;
+		transition:all 750ms linear;
+	}
+	
+	.scrollToContainer {
+		position:relative;
+		width:90%;
+		display:block;
+		margin:auto;
+	}
+	
+	#allenScrollContainer {
+		width:75%;
+		margin:auto;
+
+	}
+	
+	.scrollTo {
+		position:absolute;
+		top:0;
+		right:0;
+		width:64px;
+		height:64px;
+		border:none;
+	}
+	
+	#allenPart {
+		background: url(images/i1.png);
+	}
+	
+	#drewPart {
+		background: url(images/i2.png);
+	}
+	
+	#chiPart {
+		background: url(images/i3.png);
+	}
+	
+	#lyndonPart {
+		background: url(images/i4.png);
+	}
+	
+	#alaysiaPart {
+		background: url(images/i5.png);
+	}
+
 .section {
     background-color: white;
    	border: 1px solid black;
    	width:90%;
    	height:auto;
-   	margin: 100px auto;
+   	margin: 1000px auto 20px auto;
    	position:relative;
    }
 
    #title h1{
-     font-size: 300%;
-     margin-top: 11%;
-     font-family: 'Sigmar One', cursive;
+     font-size: 320%;
+     margin-top: 7%;
+/*      font-family: 'Sigmar One', cursive; */
    }
+
 
    /*
    * Allen
